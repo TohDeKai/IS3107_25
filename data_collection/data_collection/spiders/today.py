@@ -66,5 +66,4 @@ class TodaySpider(scrapy.Spider):
             'category': category,
             'keywords':tags,
             'source': self.name
-            
         }
