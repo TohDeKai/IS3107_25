@@ -34,6 +34,5 @@ class CNASpider(scrapy.Spider):
             'category': category,
             'keywords':keywords,
             'source': self.name
-            
         }
         
