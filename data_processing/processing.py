@@ -34,3 +34,16 @@ def stopwords_removal(headline):
     return ' '.join(stopwords_removed)
 
 # Testing on exported data
+import json
+
+def test_with_export(file_path):
+    with open(file_path) as f:
+        data = json.load(f)
+
+    for article in data:
+        title = article['title']
+        print(title)
+        print("tokenization_tagging: " + tokenization_tagging(title))
+        print("stopwords_removal: " + stopwords_removal(title))
+
+test_with_export('data_collection/exports/today.json')
