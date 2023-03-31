@@ -45,5 +45,3 @@ def test_with_export(file_path):
         print(title)
         print("tokenization_tagging: " + tokenization_tagging(title))
         print("stopwords_removal: " + stopwords_removal(title))
-
-test_with_export('data_collection/exports/today.json')
