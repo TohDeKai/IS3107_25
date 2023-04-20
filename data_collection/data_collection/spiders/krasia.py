@@ -1,5 +1,4 @@
 import scrapy
-import re 
 
 class KrAsiaSpider(scrapy.Spider):
     name = 'krasia'
