@@ -1,5 +1,5 @@
 import scrapy
-import re
+from dateutil import parser
 
 class BBCSpider(scrapy.Spider):
     name = 'bbc'
@@ -20,17 +20,21 @@ class BBCSpider(scrapy.Spider):
         url = response.request.meta['url']
 
         description = response.xpath('//meta[@name="description"]//@content').get()
-        article_date = response.xpath('//time//@datetime').get()
-        keywords = response.xpath('//meta[@type="metaTags"]//@content').getall()
-        category = response.xpath('//meta[@property="article:section"]//@content').get()
+        try:
+            article_date = response.xpath('//time//@datetime').get()
+            article_date = parser.parse(article_date)
+            keywords = response.xpath('//meta[@type="metaTags"]//@content').getall()
+            category = response.xpath('//meta[@property="article:section"]//@content').get()
 
-        yield {
-            'title': title,
-            'url': url ,
-            'description': description,
-            'date': article_date,
-            'category': category,
-            'keywords':keywords,
-            'source': self.name
-        }
+            yield {
+                'title': title,
+                'url': url ,
+                'description': description,
+                'date': article_date,
+                'category': category,
+                'keywords':keywords,
+                'source': self.name
+            }
+        except:
+            pass
         
