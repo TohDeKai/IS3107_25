@@ -33,7 +33,8 @@ class BBCSpider(scrapy.Spider):
                 'date': article_date,
                 'category': category,
                 'keywords':keywords,
-                'source': self.name
+                'source': self.name,
+                'region': "INTERNATIONAL"
             }
         except:
             pass

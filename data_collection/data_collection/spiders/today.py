@@ -65,5 +65,6 @@ class TodaySpider(scrapy.Spider):
             'date': date,
             'category': category,
             'keywords':tags,
-            'source': self.name
+            'source': self.name,
+            'region': "LOCAL"
         }
