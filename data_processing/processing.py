@@ -1,6 +1,8 @@
 import re
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
+from nltk.sentiment.util import mark_negation
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk.corpus import stopwords
 import nltk
 
@@ -25,6 +27,18 @@ def tokenization_tagging(headline):
   pos_tagged = nltk.pos_tag(tokenized)
   lemmatized = [lemmatize(word) for word in pos_tagged]
   return ' '.join(lemmatized)
+
+def analyze_sentiment(text):
+    sid = SentimentIntensityAnalyzer()
+    tokens = nltk.word_tokenize(text)
+    marked_tokens = mark_negation(tokens)
+    scores = sid.polarity_scores(' '.join(marked_tokens))
+    if scores['compound'] > 0:
+        return("Positive sentiment")
+    elif scores['compound'] < 0:
+        return("Negative sentiment")
+    else:
+        return("Neutral sentiment")
 
 # Helper function for stopword removal
 def stopwords_removal(headline):
